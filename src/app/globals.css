@@ -1,0 +1,24 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --darkgrey: #313338;
+  --grey: #3e414b;
+  --lightgrey: #dcdee1;
+  --white: #f2f3f5;
+  --header-height: 3.75rem;
+  --page-height: calc(100vh - var(--header-height));
+  --textarea-height: 45px;
+  --spacing: 1.5rem;
+}
+
+main {
+  overflow: hidden;
+}
+
+li {
+  list-style-type: none;
+}
