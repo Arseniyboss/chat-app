@@ -27,7 +27,7 @@ export const TextChatMainSection = styled.div`
   gap: var(--spacing);
   padding: 0 var(--spacing);
   padding-top: var(--spacing);
-  overflow-y: scroll;
+  overflow-y: auto;
 
   /* pushes header and messages to the bottom if they don't fill the entire height  */
   > :first-child {
