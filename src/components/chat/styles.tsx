@@ -29,14 +29,10 @@ export const TextChatMainSection = styled.div`
   padding: 0 var(--spacing);
   padding-top: var(--spacing);
   overflow-y: auto;
-
-  /* pushes header and messages to the bottom if they don't fill the entire height  */
-  > :first-child {
-    margin-top: auto;
-  }
 `
 
 export const TextChatHeader = styled.header`
+  margin-top: auto; /* pushes header and messages to the bottom if they don't fill the entire height  */
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
