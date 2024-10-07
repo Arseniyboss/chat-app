@@ -14,14 +14,15 @@ export const ChatContainer = styled.div`
 `
 
 export const TextChatContainer = styled.div<Props>`
-  display: grid;
-  grid-template-rows: 1fr calc(var(--textarea-height) + var(--spacing));
+  display: flex;
+  flex-direction: column;
   position: relative;
   background: var(--darkgrey);
   color: var(--white);
 `
 
 export const TextChatMainSection = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: var(--spacing);
@@ -59,13 +60,12 @@ export const TextArea = styled.textarea`
   resize: none;
   font-size: inherit;
   font-family: inherit;
-  position: absolute;
   bottom: var(--spacing);
   background: var(--grey);
   color: var(--lightgrey);
   padding: 0.8rem 1rem;
   margin: 0 var(--spacing);
-  width: calc(100% - (var(--spacing) * 2));
+  margin-bottom: var(--spacing);
   max-height: 200px;
   border-radius: 0.25rem;
 
