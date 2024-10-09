@@ -52,7 +52,6 @@ export const IconContainer = styled(Circle)`
 
 export const TextAreaContainer = styled.div`
   overflow: hidden;
-  position: relative;
   display: flex;
   align-items: center;
   background: var(--grey);
