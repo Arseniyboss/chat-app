@@ -71,6 +71,7 @@ export const TextArea = styled.textarea`
   font-family: inherit;
   width: 100%;
   max-height: 200px;
+  line-height: 1.22;
   padding: 0.8rem;
   padding-left: 1rem;
   background: inherit;
