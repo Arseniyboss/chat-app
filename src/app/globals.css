@@ -10,8 +10,6 @@
   --lightgrey: #dcdee1;
   --white: #f2f3f5;
   --header-height: 3.75rem;
-  --page-height: calc(100vh - var(--header-height));
-  --textarea-height: 45px;
   --spacing: 1.5rem;
 }
 

@@ -10,7 +10,7 @@ import {
   useContext,
 } from 'react'
 import { io } from 'socket.io-client'
-import { ChatType, Message, SocketData } from '@/types'
+import { ChatType, Message } from '@/types'
 import { getUsername } from '@/utils/getUsername'
 
 type ChatContextType = {
@@ -33,9 +33,8 @@ export const ChatContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     const socket = io()
-    socket.on('message', ({ message, username, date }: SocketData) => {
-      const newMessage = { text: message, username, date }
-      setMessages((messages) => [...messages, newMessage])
+    socket.on('message', (message: Message) => {
+      setMessages((messages) => [...messages, message])
     })
     return () => {
       socket.disconnect()

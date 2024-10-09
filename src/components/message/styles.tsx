@@ -5,7 +5,6 @@ import { Circle } from '@/styles/globals'
 
 export const MessageContainer = styled.li`
   display: flex;
-  align-items: center;
   gap: 0.7rem;
   margin-bottom: var(--spacing);
 `

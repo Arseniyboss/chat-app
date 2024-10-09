@@ -3,17 +3,13 @@
 import styled from 'styled-components'
 import { Circle } from '@/styles/globals'
 
-type Props = {
-  $textAreaHeight?: string
-}
-
 export const ChatContainer = styled.div`
   > :first-child {
     height: calc(100dvh - var(--header-height));
   }
 `
 
-export const TextChatContainer = styled.div<Props>`
+export const TextChatContainer = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -29,6 +25,10 @@ export const TextChatMainSection = styled.div`
   padding: 0 var(--spacing);
   padding-top: var(--spacing);
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 export const TextChatHeader = styled.header`
@@ -50,22 +50,37 @@ export const IconContainer = styled(Circle)`
   font-size: 2rem;
 `
 
+export const TextAreaContainer = styled.div`
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--grey);
+  margin: 0 var(--spacing);
+  margin-bottom: var(--spacing);
+  padding-right: 1rem;
+  border-radius: 0.25rem;
+`
+
 export const TextArea = styled.textarea`
   outline: none;
   border: none;
   resize: none;
+  overflow-y: auto;
   font-size: inherit;
   font-family: inherit;
-  bottom: var(--spacing);
-  background: var(--grey);
-  color: var(--lightgrey);
-  padding: 0.8rem 1rem;
-  margin: 0 var(--spacing);
-  margin-bottom: var(--spacing);
+  width: 100%;
   max-height: 200px;
-  border-radius: 0.25rem;
+  padding: 0.8rem;
+  padding-left: 1rem;
+  background: inherit;
+  color: var(--lightgrey);
 
   &::placeholder {
     color: #6d6f78;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 `

@@ -6,13 +6,7 @@ export type Chat = {
 }
 
 export type Message = {
-  username: string
   text: string
-  date: string
-}
-
-export type SocketData = {
-  message: string
   username: string
   date: string
 }

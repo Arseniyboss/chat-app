@@ -3,15 +3,18 @@
 import { KeyboardEvent, useState, useEffect, useRef } from 'react'
 import { io } from 'socket.io-client'
 import { BsChatFill } from 'react-icons/bs'
+import { IoMdSend } from 'react-icons/io'
 import { useChatContext } from '@/contexts/ChatContext'
 import { useAutoResizeTextarea } from '@/hooks/useAutosizeTextArea'
 import { scrollToBottom } from '@/utils/scrollToBottom'
 import { getCurrentDate } from '@/utils/getCurrentDate'
+import { Button } from '@/styles/globals'
 import {
   TextChatContainer,
   TextChatMainSection,
   TextChatHeader,
   IconContainer,
+  TextAreaContainer,
   TextArea,
 } from './styles'
 import Message from '@/components/message/Message'
@@ -28,16 +31,20 @@ const TextChat = () => {
 
   useEffect(() => {
     scrollToBottom(chatSectionRef)
-  }, [messages])
+  }, [messages, message])
+
+  const sendMessage = () => {
+    if (!message) return
+    const currentDate = getCurrentDate()
+    const socket = io()
+    socket.emit('message', { text: message, username, date: currentDate })
+    setMessage('')
+  }
 
   const handleEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key !== 'Enter') return
     e.preventDefault()
-    if (!message) return
-    const currentDate = getCurrentDate()
-    const socket = io()
-    socket.emit('message', { message, username, date: currentDate })
-    setMessage('')
+    sendMessage()
   }
   return (
     <TextChatContainer>
@@ -55,15 +62,20 @@ const TextChat = () => {
           ))}
         </ul>
       </TextChatMainSection>
-      <TextArea
-        placeholder='Message'
-        value={message}
-        ref={textareaRef}
-        rows={1}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={handleEnter}
-        aria-label='enter your message'
-      />
+      <TextAreaContainer>
+        <TextArea
+          placeholder='Message'
+          value={message}
+          ref={textareaRef}
+          rows={1}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleEnter}
+          aria-label='enter your message'
+        />
+        <Button onClick={sendMessage}>
+          <IoMdSend size={23} />
+        </Button>
+      </TextAreaContainer>
     </TextChatContainer>
   )
 }

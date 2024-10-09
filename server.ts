@@ -1,7 +1,7 @@
 import next from 'next'
 import { createServer } from 'http'
 import { Server } from 'socket.io'
-import { SocketData } from '@/types'
+import { Message } from '@/types'
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 3000
@@ -13,8 +13,8 @@ app.prepare().then(() => {
   const io = new Server(httpServer)
 
   io.on('connection', (socket) => {
-    socket.on('message', (data: SocketData) => {
-      io.emit('message', data)
+    socket.on('message', (message: Message) => {
+      io.emit('message', message)
     })
   })
 
