@@ -1,4 +1,4 @@
-import { HeaderContainer, HeaderIcons } from './styles'
+import { HeaderContainer, IconWrapper } from './styles'
 import ChatIcon from './chat-icon/ChatIcon'
 import chats from '@/data/chats'
 
@@ -6,11 +6,11 @@ const Header = () => {
   return (
     <HeaderContainer>
       <h1>Chat App</h1>
-      <HeaderIcons>
+      <IconWrapper>
         {chats.map((chat, index) => (
           <ChatIcon key={index} {...chat} />
         ))}
-      </HeaderIcons>
+      </IconWrapper>
     </HeaderContainer>
   )
 }
