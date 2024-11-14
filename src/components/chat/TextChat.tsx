@@ -31,7 +31,7 @@ const TextChat = () => {
 
   useEffect(() => {
     scrollToBottom(chatSectionRef)
-  }, [messages, message])
+  }, [messages])
 
   const sendMessage = () => {
     if (!message) return
