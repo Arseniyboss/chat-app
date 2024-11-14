@@ -5,7 +5,7 @@ import { io } from 'socket.io-client'
 import { BsChatFill } from 'react-icons/bs'
 import { IoMdSend } from 'react-icons/io'
 import { useChatContext } from '@/contexts/ChatContext'
-import { useAutoResizeTextarea } from '@/hooks/useAutosizeTextArea'
+import { useAutoResizeTextArea } from '@/hooks/useAutosizeTextArea'
 import { scrollToBottom } from '@/utils/scrollToBottom'
 import { getCurrentDate } from '@/utils/getCurrentDate'
 import { Button } from '@/styles/globals'
@@ -27,7 +27,7 @@ const TextChat = () => {
 
   const { username, messages } = useChatContext()
 
-  useAutoResizeTextarea(textareaRef, message)
+  useAutoResizeTextArea(textareaRef, message)
 
   useEffect(() => {
     scrollToBottom(chatSectionRef)
@@ -64,13 +64,13 @@ const TextChat = () => {
       </TextChatMainSection>
       <TextAreaContainer>
         <TextArea
-          placeholder='Message'
+          placeholder="Message"
           value={message}
           ref={textareaRef}
           rows={1}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={handleEnter}
-          aria-label='enter your message'
+          aria-label="enter your message"
         />
         <Button onClick={sendMessage}>
           <IoMdSend size={23} />

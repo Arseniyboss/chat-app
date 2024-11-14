@@ -1,8 +1,7 @@
 import { RefObject } from 'react'
 
 export const scrollToBottom = <T extends HTMLElement>(ref: RefObject<T>) => {
-  if (ref.current) {
-    const chatSectionHeight = ref.current.scrollHeight
-    ref.current.scrollTo(0, chatSectionHeight)
-  }
+  const chatSection = ref.current
+  if (!chatSection) return
+  chatSection.scrollTo(0, chatSection.scrollHeight)
 }
