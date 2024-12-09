@@ -2,7 +2,7 @@
 
 import '@livekit/components-styles'
 import { LiveKitRoom, VideoConference } from '@livekit/components-react'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useChatContext } from '@/contexts/ChatContext'
 
 type Props = {
@@ -17,7 +17,7 @@ const MediaRoom = ({ video, audio }: Props) => {
 
   const { username } = useChatContext()
 
-  const getLiveKitToken = useCallback(async () => {
+  const getLiveKitToken = async () => {
     try {
       const response = await fetch(`/api/livekit?username=${username}`)
       const token: string = await response.json()
@@ -25,15 +25,15 @@ const MediaRoom = ({ video, audio }: Props) => {
     } catch (e) {
       console.log(e)
     }
-  }, [username])
+  }
 
   useEffect(() => {
     getLiveKitToken()
-  }, [getLiveKitToken])
+  }, [])
 
   return (
     <LiveKitRoom
-      data-lk-theme='default'
+      data-lk-theme="default"
       token={token}
       serverUrl={serverUrl}
       connect={true}
