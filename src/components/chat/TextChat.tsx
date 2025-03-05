@@ -1,6 +1,7 @@
 'use client'
 
 import { KeyboardEvent, useState, useEffect, useRef } from 'react'
+import { isMobile } from 'react-device-detect'
 import { io } from 'socket.io-client'
 import { BsChatFill } from 'react-icons/bs'
 import { IoMdSend } from 'react-icons/io'
@@ -37,12 +38,12 @@ const TextChat = () => {
     if (!message) return
     const currentDate = getCurrentDate()
     const socket = io()
-    socket.emit('message', { text: message, username, date: currentDate })
+    socket.emit('message', { text: message.trim(), username, date: currentDate })
     setMessage('')
   }
 
-  const handleEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key !== 'Enter') return
+  const handleEnter = (e: KeyboardEvent) => {
+    if (isMobile || e.key !== 'Enter' || e.shiftKey) return
     e.preventDefault()
     sendMessage()
   }

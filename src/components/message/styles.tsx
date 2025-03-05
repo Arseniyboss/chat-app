@@ -44,4 +44,5 @@ export const MessageGroup = styled.div`
 export const MessageText = styled.p`
   color: var(--lightgrey);
   word-wrap: break-word;
+  white-space: pre-line;
 `
