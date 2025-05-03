@@ -15,7 +15,7 @@ const MediaRoom = ({ video, audio }: Props) => {
 
   const [token, setToken] = useState('')
 
-  const { username } = useChatContext()
+  const { username, setActiveChat } = useChatContext()
 
   const getLiveKitToken = async () => {
     try {
@@ -39,6 +39,7 @@ const MediaRoom = ({ video, audio }: Props) => {
       connect={true}
       video={video}
       audio={audio}
+      onDisconnected={() => setActiveChat('text')}
     >
       <VideoConference />
     </LiveKitRoom>
