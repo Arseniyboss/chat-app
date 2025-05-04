@@ -9,15 +9,16 @@ import {
   useEffect,
   useContext,
 } from 'react'
-import { io } from 'socket.io-client'
 import { ChatType, Message } from '@/types'
 import { getUsername } from '@/utils/getUsername'
+import { socket } from '@/utils/socket'
 
 type ChatContextType = {
   messages: Message[]
   username: string
   activeChat: ChatType
   setActiveChat: Dispatch<SetStateAction<ChatType>>
+  addMessage: (message: Message) => void
 }
 
 const ChatContext = createContext<ChatContextType | null>(null)
@@ -31,19 +32,17 @@ export const ChatContextProvider = ({ children }: Props) => {
   const [username, setUsername] = useState<string>('')
   const [activeChat, setActiveChat] = useState<ChatType>('text')
 
-  useEffect(() => {
-    const socket = io()
-    socket.on('message', (message: Message) => {
-      setMessages((messages) => [...messages, message])
-    })
-    return () => {
-      socket.disconnect()
-    }
-  }, [])
+  const addMessage = (message: Message) => {
+    setMessages((messages) => [...messages, message])
+  }
 
   useEffect(() => {
     const username = getUsername()
     setUsername(username)
+    socket.on('message', addMessage)
+    return () => {
+      socket.disconnect()
+    }
   }, [])
 
   const value = {
@@ -51,6 +50,7 @@ export const ChatContextProvider = ({ children }: Props) => {
     username,
     activeChat,
     setActiveChat,
+    addMessage,
   }
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>
 }

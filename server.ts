@@ -14,7 +14,7 @@ app.prepare().then(() => {
 
   io.on('connection', (socket) => {
     socket.on('message', (message: Message) => {
-      io.emit('message', message)
+      socket.broadcast.emit('message', message)
     })
   })
 

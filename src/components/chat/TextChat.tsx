@@ -2,13 +2,13 @@
 
 import { KeyboardEvent, useState, useEffect, useRef } from 'react'
 import { isMobile } from 'react-device-detect'
-import { io } from 'socket.io-client'
 import { BsChatFill } from 'react-icons/bs'
 import { IoMdSend } from 'react-icons/io'
 import { useChatContext } from '@/contexts/ChatContext'
 import { useAutoResizeTextArea } from '@/hooks/useAutosizeTextArea'
 import { scrollToBottom } from '@/utils/scrollToBottom'
 import { getCurrentDate } from '@/utils/getCurrentDate'
+import { socket } from '@/utils/socket'
 import { Button } from '@/styles/globals'
 import {
   TextChatContainer,
@@ -21,25 +21,27 @@ import {
 import Message from '@/components/message/Message'
 
 const TextChat = () => {
-  const [message, setMessage] = useState('')
+  const [messageInput, setMessageInput] = useState('')
 
   const chatSectionRef = useRef<HTMLDivElement>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-  const { username, messages } = useChatContext()
+  const { username, messages, addMessage } = useChatContext()
 
-  useAutoResizeTextArea(textareaRef, message)
+  useAutoResizeTextArea(textareaRef, messageInput)
 
   useEffect(() => {
     scrollToBottom(chatSectionRef)
   }, [messages])
 
   const sendMessage = () => {
-    if (!message) return
+    const trimmedMessage = messageInput.trim()
+    if (!trimmedMessage) return
     const currentDate = getCurrentDate()
-    const socket = io()
-    socket.emit('message', { text: message.trim(), username, date: currentDate })
-    setMessage('')
+    const message = { text: trimmedMessage, username, date: currentDate }
+    socket.emit('message', message)
+    addMessage(message)
+    setMessageInput('')
   }
 
   const handleEnter = (e: KeyboardEvent) => {
@@ -66,10 +68,10 @@ const TextChat = () => {
       <TextAreaContainer>
         <TextArea
           placeholder="Message"
-          value={message}
+          value={messageInput}
           ref={textareaRef}
           rows={1}
-          onChange={(e) => setMessage(e.target.value)}
+          onChange={(e) => setMessageInput(e.target.value)}
           onKeyDown={handleEnter}
           aria-label="enter your message"
         />
