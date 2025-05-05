@@ -15,12 +15,12 @@ const MediaRoom = ({ video, audio }: Props) => {
 
   const [token, setToken] = useState('')
 
-  const { username, setActiveChat } = useChatContext()
+  const { username, roomId, setActiveChat } = useChatContext()
 
   const getLiveKitToken = async () => {
     try {
-      const response = await fetch(`/api/livekit?username=${username}`)
-      const token: string = await response.json()
+      const response = await fetch(`/api/livekit?username=${username}&roomId=${roomId}`)
+      const token = await response.json()
       setToken(token)
     } catch (e) {
       console.log(e)
