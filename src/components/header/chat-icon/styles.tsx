@@ -12,6 +12,6 @@ export const IconContainer = styled.li<Props>`
   display: inherit;
 
   &:hover {
-    color: var(--lightgrey);
+    color: white;
   }
 `
