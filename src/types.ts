@@ -1,7 +1,9 @@
+import { ReactElement } from 'react'
+
 export type ChatType = 'text' | 'audio' | 'video'
 
 export type Chat = {
-  icon: JSX.Element
+  icon: ReactElement
   type: ChatType
 }
 
